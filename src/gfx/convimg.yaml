@@ -1,23 +1,24 @@
 palettes:
-  - name: default_palette
+  - name: global_palette
     fixed-entries:
-      - color: { index: 0, hex: "#000000" }
-      - color: { index: 1, hex: "#ffffff" }
+      - color: { index: 0, hex: "#000000", exact: true }
+      - color: { index: 1, hex: "#ffffff", exact: true }
+      - color: { index: 2, hex: "#056e2d", exact: true }
     images: automatic
 
 converts:
   - name: symbols
-    palette: default_palette
+    palette: global_palette
     style: palette
     images:
       - symbols/*
   - name: faces
-    palette: default_palette
+    palette: global_palette
     style: rlet
     images:
       - faces/*
   - name: card_back
-    palette: default_palette
+    palette: global_palette
     style: palette
     images:
       - card_back.png
@@ -25,11 +26,12 @@ converts:
 outputs:
   - type: appvar
     name: PATCEGFX
-    source-format: "c"
+    source-format: c
     source-init: true
     archived: true
-    include-file: "gfx.h"
-    palettes: default_palette
+    include-file: gfx.h
+    palettes:
+      - global_palette
     converts:
       - symbols
       - faces
