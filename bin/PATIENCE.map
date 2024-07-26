@@ -1,0 +1,45 @@
+Section          Base   Top    High   Length
+---------------- ------ ------ ------ -------
+.icon            D1A882 D1A8A7            25h
+.init.libs       D1A8A7 D1A8A7             0h
+.libs            D1A8A7 D1A8A7             0h
+.init.clock      D1A8A7 D1A8A7             0h
+.init.reruncheck D1A8A7 D1A8A7             0h
+.init            D1A8A7 D1A8C7            20h
+.fini            D1A8C7 D1A8FB            34h
+.text            D1A8FB D1A93A            3Fh
+.data            D1A93A D1A93A             0h
+.rodata          D1A93A D1A93C             2h
+.init_array      000000 000000             0h
+.ctors           000000 000000             0h
+.dtors           000000 000000             0h
+.fini_array      000000 000000             0h
+.bss             D052C6 D052C6 D13FD8      0h
+.header          D1A87F D1A882             3h
+
+Label                       Value
+-------------------------   ------
+___low_bss                = D052C6
+___len_bss                = 000000
+___heaptop                = D13FD8
+___heapbot                = D052C6
+___libs                   = D1A8A7
+___init_array_count       = 000000
+___ctors_count            = 000000
+___dtors_count            = 000000
+___fini_array_count       = 000000
+__stack                   = D1A87E
+_os_DisableHomeTextBuffer = D1A8FB
+_os_EnableHomeTextBuffer  = D1A90D
+_os_NewLine               = 0207F0
+_os_PutStrFull            = 021D2C
+_os_GetKey                = 021D38
+__start                   = D1A8A7
+___exithl                 = D1A8C7
+skip._exit                = D1A8C7
+skip.__Exit               = D1A8C7
+skip._abort               = D1A8C7
+_exit.sp                  = D1A8C8
+_exit.flash_wait_states   = D1A8D2
+_main                     = D1A91F
+_.str                     = D1A93A

@@ -1,0 +1,36 @@
+palettes:
+  - name: default_palette
+    fixed-entries:
+      - color: { index: 0, hex: "#000000" }
+      - color: { index: 1, hex: "#ffffff" }
+    images: automatic
+
+converts:
+  - name: symbols
+    palette: default_palette
+    style: palette
+    images:
+      - symbols/*
+  - name: faces
+    palette: default_palette
+    style: rlet
+    images:
+      - faces/*
+  - name: card_back
+    palette: default_palette
+    style: palette
+    images:
+      - card_back.png
+
+outputs:
+  - type: appvar
+    name: PATCEGFX
+    source-format: "c"
+    source-init: true
+    archived: true
+    include-file: "gfx.h"
+    palettes: default_palette
+    converts:
+      - symbols
+      - faces
+      - card_back
