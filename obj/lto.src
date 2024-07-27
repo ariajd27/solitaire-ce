@@ -3,38 +3,80 @@
 	section	.text,"ax",@progbits
 	public	_initCardSprites
 _initCardSprites:
-	ld	hl, (_PATCEGFX_appvar+45)
-	ld	(_face_sprites), hl
+	ld	hl, (_PATCEGFX_appvar+75)
+	ld	(_faceSprites), hl
+	ld	hl, (_PATCEGFX_appvar+99)
+	ld	(_faceSprites+3), hl
+	ld	hl, (_PATCEGFX_appvar+87)
+	ld	(_faceSprites+6), hl
 	ld	hl, (_PATCEGFX_appvar+69)
-	ld	(_face_sprites+3), hl
-	ld	hl, (_PATCEGFX_appvar+57)
-	ld	(_face_sprites+6), hl
-	ld	hl, (_PATCEGFX_appvar+39)
-	ld	(_face_sprites+9), hl
-	ld	hl, (_PATCEGFX_appvar+63)
-	ld	(_face_sprites+12), hl
-	ld	hl, (_PATCEGFX_appvar+51)
-	ld	(_face_sprites+15), hl
-	ld	hl, (_PATCEGFX_appvar+42)
-	ld	(_face_sprites+18), hl
-	ld	hl, (_PATCEGFX_appvar+66)
-	ld	(_face_sprites+21), hl
-	ld	hl, (_PATCEGFX_appvar+54)
-	ld	(_face_sprites+24), hl
-	ld	hl, (_PATCEGFX_appvar+48)
-	ld	(_face_sprites+27), hl
+	ld	(_faceSprites+9), hl
+	ld	hl, (_PATCEGFX_appvar+93)
+	ld	(_faceSprites+12), hl
+	ld	hl, (_PATCEGFX_appvar+81)
+	ld	(_faceSprites+15), hl
 	ld	hl, (_PATCEGFX_appvar+72)
-	ld	(_face_sprites+30), hl
+	ld	(_faceSprites+18), hl
+	ld	hl, (_PATCEGFX_appvar+96)
+	ld	(_faceSprites+21), hl
+	ld	hl, (_PATCEGFX_appvar+84)
+	ld	(_faceSprites+24), hl
+	ld	hl, (_PATCEGFX_appvar+78)
+	ld	(_faceSprites+27), hl
+	ld	hl, (_PATCEGFX_appvar+102)
+	ld	(_faceSprites+30), hl
+	ld	hl, (_PATCEGFX_appvar+90)
+	ld	(_faceSprites+33), hl
+	ld	hl, (_PATCEGFX_appvar+39)
+	ld	(_digitSprites+3), hl
+	ld	hl, (_PATCEGFX_appvar+66)
+	ld	(_digitSprites+6), hl
+	ld	hl, (_PATCEGFX_appvar+63)
+	ld	(_digitSprites+9), hl
+	ld	hl, (_PATCEGFX_appvar+48)
+	ld	(_digitSprites+12), hl
+	ld	hl, (_PATCEGFX_appvar+45)
+	ld	(_digitSprites+15), hl
+	ld	hl, (_PATCEGFX_appvar+57)
+	ld	(_digitSprites+18), hl
+	ld	hl, (_PATCEGFX_appvar+54)
+	ld	(_digitSprites+21), hl
+	ld	hl, (_PATCEGFX_appvar+42)
+	ld	(_digitSprites+24), hl
+	ld	hl, (_PATCEGFX_appvar+51)
+	ld	(_digitSprites+27), hl
 	ld	hl, (_PATCEGFX_appvar+60)
-	ld	(_face_sprites+33), hl
+	ld	(_digitSprites+30), hl
+	ld	hl, (_PATCEGFX_appvar+21)
+	ld	(_aceSprites), hl
+	ld	hl, (_PATCEGFX_appvar+3)
+	ld	(_aceSprites+3), hl
+	ld	hl, (_PATCEGFX_appvar+12)
+	ld	(_aceSprites+6), hl
+	ld	hl, (_PATCEGFX_appvar+30)
+	ld	(_aceSprites+9), hl
+	ld	hl, (_PATCEGFX_appvar+27)
+	ld	(_smallSymbols), hl
+	ld	hl, (_PATCEGFX_appvar+9)
+	ld	(_smallSymbols+3), hl
+	ld	hl, (_PATCEGFX_appvar+18)
+	ld	(_smallSymbols+6), hl
+	ld	hl, (_PATCEGFX_appvar+36)
+	ld	(_smallSymbols+9), hl
 	ret
 	section	.text,"ax",@progbits
 
 	section	.text,"ax",@progbits
 	public	_drawCard
 _drawCard:
-	ld	hl, -15
+	ld	hl, -82
 	call	__frameset
+	lea	hl, ix - 22
+	ld	(ix - 67), hl
+	lea	hl, ix - 44
+	ld	(ix - 82), hl
+	lea	hl, ix - 58
+	ld	(ix - 79), hl
 	or	a, a
 	sbc	hl, hl
 	push	hl
@@ -44,12 +86,9 @@ _drawCard:
 	or	a, a
 	sbc	hl, hl
 	ld	l, (ix + 9)
-	ld	bc, 43
-	ld	(ix - 15), hl
-	push	hl
-	pop	iy
-	sbc	hl, hl
-	ld	(ix - 3), hl
+	ld	(ix - 64), hl
+	ld	(ix - 61), hl
+	ld	bc, 0
 BB1_1:
 	push	de
 	pop	hl
@@ -57,31 +96,30 @@ BB1_1:
 	or	a, a
 	sbc	hl, bc
 	jr	z, BB1_7
-	ld	(ix - 6), iy
-	ld	(ix - 9), de
+	ld	(ix - 70), de
 	ex	de, hl
 	ld	de, -43
 	add	hl, de
-	ld	(ix - 12), hl
-	ld	hl, (ix - 3)
-	push	hl
+	ld	(ix - 76), hl
+	push	bc
 	pop	iy
 	ld	de, 214
 	add	iy, de
-	push	hl
-	pop	de
+	push	bc
+	pop	hl
+	ld	de, 43
 	or	a, a
-	sbc	hl, bc
+	sbc	hl, de
 	jr	nc, BB1_4
 	ld	iy, 0
 BB1_4:
-	push	de
+	ld	(ix - 73), bc
+	push	bc
 	pop	hl
-	ld	(ix - 3), de
 	ld	de, 2
 	or	a, a
 	sbc	hl, de
-	ld	hl, (ix - 12)
+	ld	hl, (ix - 76)
 	jr	c, BB1_6
 	lea	hl, iy
 BB1_6:
@@ -96,71 +134,52 @@ BB1_6:
 	ld	de, 33
 	add	hl, de
 	push	hl
-	ld	hl, (ix - 6)
+	ld	hl, (ix - 61)
 	push	hl
 	push	iy
 	call	_gfx_HorizLine
-	ld	iy, (ix - 6)
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	hl, (ix - 3)
-	inc	hl
-	ld	(ix - 3), hl
-	ld	de, (ix - 9)
+	ld	bc, (ix - 73)
+	inc	bc
+	ld	de, (ix - 70)
 	dec	de
-	inc	iy
-	ld	bc, 43
-	jp	BB1_1
+	ld	hl, (ix - 61)
+	inc	hl
+	ld	(ix - 61), hl
+	jr	BB1_1
 BB1_7:
-	ld	a, (ix + 12)
-	bit	1, a
+	ld	e, (ix + 12)
+	bit	1, e
+	ld	iy, (ix + 6)
 	jr	nz, BB1_9
-	ld	bc, (_PATCEGFX_appvar+75)
-	ld	de, (ix + 6)
-	push	de
-	pop	iy
+	ld	de, (_PATCEGFX_appvar+105)
 	ld	hl, 2
-	ex	de, hl
-	add	iy, de
-	ld	hl, (ix - 15)
-	add	hl, de
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	hl, (ix - 64)
+	add	hl, bc
 	push	hl
 	push	iy
-	push	bc
-	call	_gfx_Sprite
-	jr	BB1_11
+	push	de
+	jp	BB1_18
 BB1_9:
+	ld	a, e
 	cp	a, -80
-	jr	c, BB1_12
-	ld	hl, 1
-	push	hl
-	call	_gfx_SetColor
-	pop	hl
-	ld	hl, 33
-	push	hl
-	ld	hl, 19
-	push	hl
-	ld	hl, 6
-	push	hl
-	inc	hl
-	push	hl
-	call	_gfx_Rectangle
-	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-	ld	a, (ix + 12)
+	jr	c, BB1_11
+	ld	a, e
+	ld	b, 4
+	call	__bshru
+	ld	l, a
+	ld	a, e
 	ld	b, 2
 	call	__bshru
 	and	a, 3
 	ld	e, 3
 	ld	d, a
 	mlt	de
-	ld	a, (ix + 12)
-	ld	b, 4
-	call	__bshru
-	ld	l, a
 	ld	a, e
 	add	a, l
 	or	a, a
@@ -172,25 +191,196 @@ BB1_9:
 	call	__imulu
 	push	hl
 	pop	de
-	ld	hl, _face_sprites
+	ld	hl, _faceSprites
 	add	hl, de
-	ld	bc, (hl)
-	ld	de, (ix + 6)
+	ld	de, (hl)
+	ld	hl, 3
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	hl, (ix - 64)
+	add	hl, bc
+	push	hl
+	push	iy
+	push	de
+	call	_gfx_RLETSprite
+	jp	BB1_19
+BB1_11:
+	ld	de, (ix - 67)
+	ld	hl, ___const.drawCard.digitInverse_data
+	ld	iy, 22
+	lea	bc, iy
+	ldir
+	ld	de, (ix - 82)
+	ld	hl, ___const.drawCard.digitInverse_data
+	lea	bc, iy
+	ldir
+	ld	a, (ix + 12)
+	ld	b, 4
+	call	__bshru
+	or	a, a
+	sbc	hl, hl
+	ld	l, a
+	ld	bc, 3
+	call	__imulu
+	push	hl
+	pop	de
+	ld	hl, _digitSprites
+	add	hl, de
+	ld	iy, (hl)
+	ld	a, (ix + 12)
+	ld	b, 2
+	call	__bshru
+	and	a, c
+	or	a, a
+	sbc	hl, hl
+	ld	l, a
+	ld	(ix - 61), hl
+	ld	de, 22
+	ld	bc, 2
+BB1_12:
+	push	bc
+	pop	hl
+	or	a, a
+	sbc	hl, de
+	jr	z, BB1_16
+	lea	hl, iy
+	add	hl, bc
+	ld	a, (hl)
+	or	a, a
+	ld	a, 0
+	jr	z, BB1_15
+	ld	hl, _suitColors
+	ld	(ix - 70), iy
 	push	de
 	pop	iy
-	ld	de, 3
+	ld	de, (ix - 61)
+	add	hl, de
+	lea	de, iy
+	ld	iy, (ix - 70)
+	ld	a, (hl)
+BB1_15:
+	ld	hl, (ix - 67)
+	add	hl, bc
+	ld	(hl), a
+	inc	bc
+	jr	BB1_12
+BB1_16:
+	ld	hl, (ix - 82)
+	push	hl
+	ld	hl, (ix - 67)
+	push	hl
+	call	_gfx_RotateSpriteHalf
+	pop	hl
+	pop	hl
+	ld	hl, (ix + 6)
+	push	hl
+	pop	iy
+	ld	de, 2
 	add	iy, de
-	ld	hl, (ix - 15)
+	ld	hl, (ix - 64)
+	inc	de
 	add	hl, de
 	push	hl
 	push	iy
+	ld	hl, (ix - 67)
+	push	hl
+	call	_gfx_Sprite
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	iy, (ix + 6)
+	ld	de, 26
+	add	iy, de
+	ld	hl, (ix - 64)
+	ld	de, 38
+	add	hl, de
+	push	hl
+	push	iy
+	ld	hl, (ix - 82)
+	push	hl
+	call	_gfx_Sprite
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	de, (ix - 79)
+	ld	hl, ___const.drawCard.symbolInverse_data
+	ld	bc, 14
+	ldir
+	ld	bc, 3
+	ld	hl, (ix - 61)
+	call	__imulu
+	push	hl
+	pop	de
+	ld	hl, _smallSymbols
+	add	hl, de
+	ld	(ix - 67), hl
+	ld	bc, (hl)
+	ld	de, (ix - 79)
+	push	de
 	push	bc
-	call	_gfx_RLETSprite
-BB1_11:
+	call	_gfx_RotateSpriteHalf
+	pop	hl
+	pop	hl
+	ld	hl, (ix - 67)
+	ld	de, (hl)
+	ld	iy, (ix + 6)
+	ld	bc, 3
+	add	iy, bc
+	ld	hl, (ix - 64)
+	ld	bc, 8
+	add	hl, bc
+	push	hl
+	push	iy
+	push	de
+	call	_gfx_Sprite
 	pop	hl
 	pop	hl
 	pop	hl
-BB1_12:
+	ld	iy, (ix + 6)
+	ld	de, 22
+	add	iy, de
+	ld	hl, (ix - 64)
+	ld	de, 33
+	add	hl, de
+	push	hl
+	push	iy
+	ld	hl, (ix - 79)
+	push	hl
+	call	_gfx_Sprite
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	a, (ix + 12)
+	and	a, -16
+	cp	a, 16
+	jr	nz, BB1_20
+	ld	bc, 3
+	ld	hl, (ix - 61)
+	call	__imulu
+	push	hl
+	pop	de
+	ld	hl, _aceSprites
+	add	hl, de
+	ld	hl, (hl)
+	ld	(ix - 61), hl
+	ld	de, 11
+	ld	iy, (ix + 6)
+	add	iy, de
+	ld	de, 17
+	ld	hl, (ix - 64)
+	add	hl, de
+	push	hl
+	push	iy
+	ld	hl, (ix - 61)
+	push	hl
+BB1_18:
+	call	_gfx_Sprite
+BB1_19:
+	pop	hl
+	pop	hl
+	pop	hl
+BB1_20:
 	ld	sp, ix
 	pop	ix
 	ret
@@ -207,7 +397,7 @@ _drawPattern:
 	section	.text,"ax",@progbits
 	public	_calculation_setup
 _calculation_setup:
-	ld	hl, -21
+	ld	hl, -19
 	call	__frameset
 	ld	hl, 9
 	push	hl
@@ -228,34 +418,36 @@ _calculation_setup:
 	pop	hl
 	or	a, a
 	jp	nz, BB3_8
+	ld	a, 16
+	ld	(ix - 4), a
 	ld	iy, 87
 	ld	hl, 239
-	ld	(ix - 21), hl
-	ld	a, -96
-	ld	(ix - 9), a
+	ld	(ix - 16), hl
 	ld	hl, 18
 	ld	(ix - 3), hl
 	ld	de, 55
 	ld	bc, 0
-	push	bc
-	pop	hl
-	ld	(ix - 6), iy
+	lea	hl, iy
 BB3_3:
-	ld	(ix - 18), hl
+	ld	(ix - 10), iy
+	ld	(ix - 13), bc
+	push	bc
+	pop	iy
 	ld	bc, 11
-	add	hl, bc
-	ld	bc, 38
 	add	iy, bc
-	ld	(ix - 12), iy
-	ld	(ix - 15), hl
+	ld	bc, 38
+	add	hl, bc
+	ld	(ix - 7), hl
+	lea	hl, iy
 	or	a, a
 	sbc	hl, de
 	jr	z, BB3_5
+	ld	(ix - 19), iy
 	ld	iy, (_stacks)
-	ld	de, (ix - 18)
+	ld	de, (ix - 13)
 	add	iy, de
 	ld	(iy + 11), 2
-	ld	hl, (ix - 6)
+	ld	hl, (ix - 10)
 	ld	(iy + 12), hl
 	ld	(iy + 15), 25
 	ld	hl, 48
@@ -265,9 +457,10 @@ BB3_3:
 	pop	hl
 	pop	hl
 	or	a, a
-	ld	iy, (ix - 12)
-	ld	(ix - 6), iy
-	ld	hl, (ix - 15)
+	ld	hl, (ix - 7)
+	push	hl
+	pop	iy
+	ld	bc, (ix - 19)
 	ld	de, 55
 	jr	nz, BB3_8
 	jr	BB3_3
@@ -281,8 +474,8 @@ BB3_6:
 	add	hl, de
 	ld	de, 38
 	add	iy, de
-	ld	(ix - 6), iy
-	ld	(ix - 12), hl
+	ld	(ix - 7), iy
+	ld	(ix - 10), hl
 	ld	de, 55
 	or	a, a
 	sbc	hl, de
@@ -290,7 +483,7 @@ BB3_6:
 	ld	iy, (_stacks)
 	add	iy, bc
 	ld	(iy + 55), 4
-	ld	hl, (ix - 21)
+	ld	hl, (ix - 16)
 	ld	(iy + 56), hl
 	ld	(iy + 59), 65
 	ld	(iy + 61), 11
@@ -301,9 +494,9 @@ BB3_6:
 	pop	hl
 	pop	hl
 	or	a, a
-	ld	iy, (ix - 6)
-	ld	(ix - 21), iy
-	ld	bc, (ix - 12)
+	ld	iy, (ix - 7)
+	ld	(ix - 16), iy
+	ld	bc, (ix - 10)
 	jr	z, BB3_6
 BB3_8:
 	ld	a, 1
@@ -322,14 +515,14 @@ BB3_11:
 	ld	de, (ix - 3)
 	add	hl, de
 	ld	hl, (hl)
-	ld	(ix - 6), hl
+	ld	(ix - 7), hl
 	ld	a, (hl)
 	and	a, 12
-	or	a, (ix - 9)
+	or	a, (ix - 4)
 	or	a, 3
 	ld	(hl), a
 	call	_rand
-	ld	iy, (ix - 6)
+	ld	iy, (ix - 7)
 	ld	e, (iy)
 	ld	a, l
 	ld	b, 2
@@ -341,16 +534,16 @@ BB3_11:
 	ld	e, a
 	ld	a, l
 	add	a, e
-	ld	hl, (ix - 6)
+	ld	hl, (ix - 7)
 	ld	(hl), a
 	ld	de, 11
 	ld	hl, (ix - 3)
 	add	hl, de
 	ld	(ix - 3), hl
 	ld	de, 62
-	ld	a, (ix - 9)
+	ld	a, (ix - 4)
 	add	a, 16
-	ld	(ix - 9), a
+	ld	(ix - 4), a
 	jr	BB3_11
 BB3_13:
 	ld	bc, 14
@@ -364,7 +557,7 @@ BB3_14:
 	ld	a, e
 	ld	b, 4
 	call	__bshl
-	ld	(ix - 6), a
+	ld	(ix - 4), a
 	ld	iyl, 0
 BB3_16:
 	ld	a, iyl
@@ -400,9 +593,9 @@ BB3_16:
 BB3_19:
 	push	af
 	ld	a, iyl
-	ld	(ix - 12), a
+	ld	(ix - 10), a
 	pop	af
-	ld	(ix - 9), de
+	ld	(ix - 7), de
 BB3_20:
 	ld	iy, (_stacks)
 	ld	hl, (iy + 7)
@@ -419,17 +612,17 @@ BB3_20:
 	bit	0, a
 	jr	nz, BB3_20
 	push	af
-	ld	a, (ix - 12)
+	ld	a, (ix - 10)
 	ld	iyl, a
 	pop	af
 	ld	a, iyl
 	ld	b, 2
 	call	__bshl
 	and	a, 12
-	add	a, (ix - 6)
+	add	a, (ix - 4)
 	inc	a
 	ld	(hl), a
-	ld	de, (ix - 9)
+	ld	de, (ix - 7)
 BB3_22:
 	inc	iyl
 	jp	BB3_16
@@ -476,7 +669,7 @@ _PATCEGFX_init:
 	or	a, a
 	sbc	hl, de
 	ld	(ix - 6), hl
-	ld	de, 78
+	ld	de, 108
 	ld	iy, 0
 BB5_2:
 	lea	hl, iy
@@ -495,7 +688,7 @@ BB5_2:
 	pop	iy
 	ld	de, 3
 	add	iy, de
-	ld	de, 78
+	ld	de, 108
 	jr	BB5_2
 BB5_4:
 	ld	hl, (ix - 3)
@@ -875,9 +1068,38 @@ BB12_10:
 	section	.text,"ax",@progbits
 
 	section	.bss,"aw",@nobits
-	public	_face_sprites
-_face_sprites:
+	public	_faceSprites
+_faceSprites:
 	rb	36
+
+	section	.bss,"aw",@nobits
+	public	_digitSprites
+_digitSprites:
+	rb	33
+
+	section	.bss,"aw",@nobits
+	public	_aceSprites
+_aceSprites:
+	rb	12
+
+	section	.bss,"aw",@nobits
+	public	_smallSymbols
+_smallSymbols:
+	rb	12
+
+	section	.rodata,"a",@progbits
+	private	___const.drawCard.digitInverse_data
+___const.drawCard.digitInverse_data:
+	db	5
+	db	4
+	db	20 dup 0
+
+	section	.rodata,"a",@progbits
+	private	___const.drawCard.symbolInverse_data
+___const.drawCard.symbolInverse_data:
+	db	3
+	db	4
+	db	12 dup 0
 
 	section	.rodata,"a",@progbits
 	private	_.str
@@ -888,6 +1110,11 @@ _.str:
 	private	_.str.1
 _.str.1:
 	db	"r", 0
+
+	section	.rodata,"a",@progbits
+	public	_suitColors
+_suitColors:
+	db	""
 
 	section	.data,"aw",@progbits
 	public	_PATCEGFX_appvar
@@ -906,18 +1133,28 @@ _PATCEGFX_appvar:
 	dl	962
 	dl	1004
 	dl	1038
-	dl	1955
-	dl	2909
-	dl	3845
-	dl	4753
-	dl	5701
-	dl	6671
-	dl	7660
-	dl	8601
-	dl	9561
-	dl	10498
-	dl	11464
-	dl	12419
+	dl	1060
+	dl	1082
+	dl	1104
+	dl	1126
+	dl	1148
+	dl	1170
+	dl	1192
+	dl	1214
+	dl	1236
+	dl	1258
+	dl	2175
+	dl	3129
+	dl	4065
+	dl	4973
+	dl	5921
+	dl	6891
+	dl	7880
+	dl	8821
+	dl	9781
+	dl	10718
+	dl	11684
+	dl	12639
 
 	section	.data,"aw",@progbits
 	public	_setup
@@ -954,6 +1191,7 @@ _stacks:
 	extern	_rand
 	extern	_ti_Close
 	extern	_gfx_HorizLine
+	extern	_gfx_RotateSpriteHalf
 	extern	_gfx_SetDraw
 	extern	_gfx_FillScreen
 	extern	__Unwind_SjLj_Unregister
@@ -962,10 +1200,9 @@ _stacks:
 	extern	__irems
 	extern	_gfx_FillRectangle
 	extern	__imulu
-	extern	_ti_Open
 	extern	_gfx_SetColor
-	extern	_gfx_Rectangle
 	extern	_gfx_Sprite
+	extern	_ti_Open
 	extern	__bshl
 	extern	_ti_GetDataPtr
 	extern	_calloc

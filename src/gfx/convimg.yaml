@@ -1,9 +1,12 @@
 palettes:
   - name: global_palette
     fixed-entries:
-      - color: { index: 0, hex: "#ffffff", exact: true }
-      - color: { index: 1, hex: "#000000", exact: true }
-      - color: { index: 2, hex: "#056e2d", exact: true }
+      - color: { index: 0, hex: "#ffffff", exact: true } # white
+      - color: { index: 1, hex: "#000000", exact: true } # black
+      - color: { index: 2, hex: "#056e2d", exact: true } # green
+      - color: { index: 3, hex: "#ab5236", exact: true } # red
+      - color: { index: 4, hex: "#233362", exact: true } # blue
+      - color: { index: 5, hex: "#d36211", exact: true } # orange
     images: automatic
 
 converts:
@@ -12,6 +15,11 @@ converts:
     style: palette
     images:
       - symbols/*
+  - name: digits
+    palette: global_palette
+    style: palette
+    images:
+      - digits/*
   - name: faces
     palette: global_palette
     style: rlet
@@ -34,5 +42,6 @@ outputs:
       - global_palette
     converts:
       - symbols
+      - digits
       - faces
       - card_back
