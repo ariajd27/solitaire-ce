@@ -1,8 +1,8 @@
 palettes:
   - name: global_palette
     fixed-entries:
-      - color: { index: 0, hex: "#000000", exact: true }
-      - color: { index: 1, hex: "#ffffff", exact: true }
+      - color: { index: 0, hex: "#ffffff", exact: true }
+      - color: { index: 1, hex: "#000000", exact: true }
       - color: { index: 2, hex: "#056e2d", exact: true }
     images: automatic
 

@@ -7,8 +7,14 @@
 #define CARD_WIDTH 33
 #define CARD_HEIGHT 45
 #define CARD_BEZEL 2
+
 #define CARD_BACK_HOFFSET 2
 #define CARD_BACK_VOFFSET 2
+
+#define FACE_CARD_RECT_HOFFSET 7
+#define FACE_CARD_RECT_VOFFSET 6
+#define FACE_CARD_RECT_WIDTH 19
+#define FACE_CARD_RECT_HEIGHT 33
 #define FACE_CARD_ART_HOFFSET 3
 #define FACE_CARD_ART_VOFFSET 3
 
@@ -51,6 +57,13 @@ void drawCard(const unsigned int x, const unsigned char y, const struct card_t c
 	else if (card.value >= VALUE_JACK)
 	{
 		// just draw the face; the corners are included
+
+		// this is to draw the box on face cards-- currently removed but
+		// could be worth putting in later for more compression?
+		// gfx_SetColor(COLOR_BLACK);
+		// gfx_Rectangle(FACE_CARD_RECT_HOFFSET, FACE_CARD_RECT_VOFFSET,
+		//		FACE_CARD_RECT_WIDTH, FACE_CARD_RECT_HEIGHT);
+
 		gfx_RLETSprite(face_sprites[card.suit * 3 + card.value - VALUE_JACK],
 				x + FACE_CARD_ART_HOFFSET, y + FACE_CARD_ART_VOFFSET);
 	}

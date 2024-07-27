@@ -35,7 +35,8 @@ _initCardSprites:
 _drawCard:
 	ld	hl, -15
 	call	__frameset
-	ld	hl, 1
+	or	a, a
+	sbc	hl, hl
 	push	hl
 	call	_gfx_SetColor
 	ld	de, 45
@@ -112,8 +113,8 @@ BB1_6:
 	ld	bc, 43
 	jp	BB1_1
 BB1_7:
-	ld	l, (ix + 12)
-	bit	1, l
+	ld	a, (ix + 12)
+	bit	1, a
 	jr	nz, BB1_9
 	ld	bc, (_PATCEGFX_appvar+75)
 	ld	de, (ix + 6)
@@ -130,22 +131,38 @@ BB1_7:
 	call	_gfx_Sprite
 	jr	BB1_11
 BB1_9:
-	ld	a, l
 	cp	a, -80
 	jr	c, BB1_12
-	ld	a, l
-	ld	b, 4
-	call	__bshru
-	ld	e, a
-	ld	a, l
+	ld	hl, 1
+	push	hl
+	call	_gfx_SetColor
+	pop	hl
+	ld	hl, 33
+	push	hl
+	ld	hl, 19
+	push	hl
+	ld	hl, 6
+	push	hl
+	inc	hl
+	push	hl
+	call	_gfx_Rectangle
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	a, (ix + 12)
 	ld	b, 2
 	call	__bshru
 	and	a, 3
-	ld	l, 3
-	ld	h, a
-	mlt	hl
-	ld	a, l
-	add	a, e
+	ld	e, 3
+	ld	d, a
+	mlt	de
+	ld	a, (ix + 12)
+	ld	b, 4
+	call	__bshru
+	ld	l, a
+	ld	a, e
+	add	a, l
 	or	a, a
 	sbc	hl, hl
 	ld	l, a
@@ -190,7 +207,7 @@ _drawPattern:
 	section	.text,"ax",@progbits
 	public	_calculation_setup
 _calculation_setup:
-	ld	hl, -19
+	ld	hl, -21
 	call	__frameset
 	ld	hl, 9
 	push	hl
@@ -211,36 +228,34 @@ _calculation_setup:
 	pop	hl
 	or	a, a
 	jp	nz, BB3_8
-	ld	a, 16
-	ld	(ix - 4), a
 	ld	iy, 87
 	ld	hl, 239
-	ld	(ix - 16), hl
+	ld	(ix - 21), hl
+	ld	a, -96
+	ld	(ix - 9), a
 	ld	hl, 18
 	ld	(ix - 3), hl
 	ld	de, 55
 	ld	bc, 0
-	lea	hl, iy
-BB3_3:
-	ld	(ix - 10), iy
-	ld	(ix - 13), bc
 	push	bc
-	pop	iy
+	pop	hl
+	ld	(ix - 6), iy
+BB3_3:
+	ld	(ix - 18), hl
 	ld	bc, 11
-	add	iy, bc
-	ld	bc, 38
 	add	hl, bc
-	ld	(ix - 7), hl
-	lea	hl, iy
+	ld	bc, 38
+	add	iy, bc
+	ld	(ix - 12), iy
+	ld	(ix - 15), hl
 	or	a, a
 	sbc	hl, de
 	jr	z, BB3_5
-	ld	(ix - 19), iy
 	ld	iy, (_stacks)
-	ld	de, (ix - 13)
+	ld	de, (ix - 18)
 	add	iy, de
 	ld	(iy + 11), 2
-	ld	hl, (ix - 10)
+	ld	hl, (ix - 6)
 	ld	(iy + 12), hl
 	ld	(iy + 15), 25
 	ld	hl, 48
@@ -250,10 +265,9 @@ BB3_3:
 	pop	hl
 	pop	hl
 	or	a, a
-	ld	hl, (ix - 7)
-	push	hl
-	pop	iy
-	ld	bc, (ix - 19)
+	ld	iy, (ix - 12)
+	ld	(ix - 6), iy
+	ld	hl, (ix - 15)
 	ld	de, 55
 	jr	nz, BB3_8
 	jr	BB3_3
@@ -267,8 +281,8 @@ BB3_6:
 	add	hl, de
 	ld	de, 38
 	add	iy, de
-	ld	(ix - 7), iy
-	ld	(ix - 10), hl
+	ld	(ix - 6), iy
+	ld	(ix - 12), hl
 	ld	de, 55
 	or	a, a
 	sbc	hl, de
@@ -276,7 +290,7 @@ BB3_6:
 	ld	iy, (_stacks)
 	add	iy, bc
 	ld	(iy + 55), 4
-	ld	hl, (ix - 16)
+	ld	hl, (ix - 21)
 	ld	(iy + 56), hl
 	ld	(iy + 59), 65
 	ld	(iy + 61), 11
@@ -287,9 +301,9 @@ BB3_6:
 	pop	hl
 	pop	hl
 	or	a, a
-	ld	iy, (ix - 7)
-	ld	(ix - 16), iy
-	ld	bc, (ix - 10)
+	ld	iy, (ix - 6)
+	ld	(ix - 21), iy
+	ld	bc, (ix - 12)
 	jr	z, BB3_6
 BB3_8:
 	ld	a, 1
@@ -308,14 +322,14 @@ BB3_11:
 	ld	de, (ix - 3)
 	add	hl, de
 	ld	hl, (hl)
-	ld	(ix - 7), hl
+	ld	(ix - 6), hl
 	ld	a, (hl)
 	and	a, 12
-	or	a, (ix - 4)
+	or	a, (ix - 9)
 	or	a, 3
 	ld	(hl), a
 	call	_rand
-	ld	iy, (ix - 7)
+	ld	iy, (ix - 6)
 	ld	e, (iy)
 	ld	a, l
 	ld	b, 2
@@ -327,16 +341,16 @@ BB3_11:
 	ld	e, a
 	ld	a, l
 	add	a, e
-	ld	hl, (ix - 7)
+	ld	hl, (ix - 6)
 	ld	(hl), a
 	ld	de, 11
 	ld	hl, (ix - 3)
 	add	hl, de
 	ld	(ix - 3), hl
 	ld	de, 62
-	ld	a, (ix - 4)
+	ld	a, (ix - 9)
 	add	a, 16
-	ld	(ix - 4), a
+	ld	(ix - 9), a
 	jr	BB3_11
 BB3_13:
 	ld	bc, 14
@@ -350,7 +364,7 @@ BB3_14:
 	ld	a, e
 	ld	b, 4
 	call	__bshl
-	ld	(ix - 4), a
+	ld	(ix - 6), a
 	ld	iyl, 0
 BB3_16:
 	ld	a, iyl
@@ -386,9 +400,9 @@ BB3_16:
 BB3_19:
 	push	af
 	ld	a, iyl
-	ld	(ix - 10), a
+	ld	(ix - 12), a
 	pop	af
-	ld	(ix - 7), de
+	ld	(ix - 9), de
 BB3_20:
 	ld	iy, (_stacks)
 	ld	hl, (iy + 7)
@@ -405,17 +419,17 @@ BB3_20:
 	bit	0, a
 	jr	nz, BB3_20
 	push	af
-	ld	a, (ix - 10)
+	ld	a, (ix - 12)
 	ld	iyl, a
 	pop	af
 	ld	a, iyl
 	ld	b, 2
 	call	__bshl
 	and	a, 12
-	add	a, (ix - 4)
+	add	a, (ix - 6)
 	inc	a
 	ld	(hl), a
-	ld	de, (ix - 7)
+	ld	de, (ix - 9)
 BB3_22:
 	inc	iyl
 	jp	BB3_16
@@ -502,7 +516,8 @@ _drawBackground:
 	push	hl
 	call	_gfx_FillScreen
 	pop	hl
-	ld	hl, 1
+	or	a, a
+	sbc	hl, hl
 	push	hl
 	call	_gfx_SetColor
 	pop	hl
@@ -891,18 +906,18 @@ _PATCEGFX_appvar:
 	dl	962
 	dl	1004
 	dl	1038
-	dl	2133
-	dl	3204
-	dl	4271
-	dl	5319
-	dl	6374
-	dl	7429
-	dl	8524
-	dl	9564
-	dl	10685
-	dl	11788
-	dl	12900
-	dl	14001
+	dl	1955
+	dl	2909
+	dl	3845
+	dl	4753
+	dl	5701
+	dl	6671
+	dl	7660
+	dl	8601
+	dl	9561
+	dl	10498
+	dl	11464
+	dl	12419
 
 	section	.data,"aw",@progbits
 	public	_setup
@@ -949,6 +964,7 @@ _stacks:
 	extern	__imulu
 	extern	_ti_Open
 	extern	_gfx_SetColor
+	extern	_gfx_Rectangle
 	extern	_gfx_Sprite
 	extern	__bshl
 	extern	_ti_GetDataPtr

@@ -2,14 +2,14 @@ Section          Base   Top    High   Length
 ---------------- ------ ------ ------ -------
 .icon            D1A882 D1A8A7            25h
 .init.libs       D1A8A7 D1A8FF            58h
-.libs            D1A8FF D1A962            63h
-.init.clock      D1A962 D1A962             0h
-.init.reruncheck D1A962 D1A962             0h
-.init            D1A962 D1A98C            2Ah
-.fini            D1A98C D1A9C0            34h
-.text            D1A9C0 D1B3F8           A38h
-.data            D1B3F8 D1B45F            67h
-.rodata          D1B45F D1B48C            2Dh
+.libs            D1A8FF D1A966            67h
+.init.clock      D1A966 D1A966             0h
+.init.reruncheck D1A966 D1A966             0h
+.init            D1A966 D1A990            2Ah
+.fini            D1A990 D1A9C4            34h
+.text            D1A9C4 D1B419           A55h
+.data            D1B419 D1B480            67h
+.rodata          D1B480 D1B4AD            2Dh
 .init_array      000000 000000             0h
 .ctors           000000 000000             0h
 .dtors           000000 000000             0h
@@ -29,59 +29,59 @@ ___ctors_count            = 000000
 ___dtors_count            = 000000
 ___fini_array_count       = 000000
 __stack                   = D1A87E
-__bshl                    = D1A9C0
-__bshru                   = D1A9C9
-__frameset                = D1A9D3
-__frameset0               = D1A9E1
-__iand                    = D1A9EC
-__idvrms                  = D1AA05
-__idvrmu                  = D1AA33
-__imulu                   = D1AA4B
-__indcallhl               = D1AA7B
-__ineg                    = D1AA7C
-__irems                   = D1AA85
-_os_DisableHomeTextBuffer = D1AA8D
-_os_EnableHomeTextBuffer  = D1AA9F
-_random                   = D1AAB1
-__setstate                = D1AB0F
-__state                   = D1B3F8
-_free                     = D1AB1F
-_malloc                   = D1ABDC
+__bshl                    = D1A9C4
+__bshru                   = D1A9CD
+__frameset                = D1A9D7
+__frameset0               = D1A9E5
+__iand                    = D1A9F0
+__idvrms                  = D1AA09
+__idvrmu                  = D1AA37
+__imulu                   = D1AA4F
+__indcallhl               = D1AA7F
+__ineg                    = D1AA80
+__irems                   = D1AA89
+_os_DisableHomeTextBuffer = D1AA91
+_os_EnableHomeTextBuffer  = D1AAA3
+_random                   = D1AAB5
+__setstate                = D1AB13
+__state                   = D1B419
+_free                     = D1AB23
+_malloc                   = D1ABE0
 __alloc_base              = D052C6
-_calloc                   = D1AC7B
-_memset                   = D1AC99
-_rand                     = D1ACB0
-_sbrk                     = D1ACBD
-__sbrkbase                = D1B408
-_srand                    = D1ACDB
-.missingappvar            = D1B45F
-.libloadname              = D1B464
+_calloc                   = D1AC7F
+_memset                   = D1AC9D
+_rand                     = D1ACB4
+_sbrk                     = D1ACC1
+__sbrkbase                = D1B429
+_srand                    = D1ACDF
+.missingappvar            = D1B480
+.libloadname              = D1B485
 .libloadnamelen           = 000007
-.webaddress               = D1B46C
-__start                   = D1A962
-___exithl                 = D1A98C
-skip._exit                = D1A98C
-skip.__Exit               = D1A98C
-skip._abort               = D1A98C
-_exit.sp                  = D1A98D
-_exit.flash_wait_states   = D1A997
-_initCardSprites          = D1ACE3
-_drawCard                 = D1AD44
-_calculation_setup        = D1AE73
-_freecell_setup           = D1B09B
-_PATCEGFX_init            = D1B0A6
-_drawBackground           = D1B11F
-_drawGame                 = D1B14B
-_main                     = D1B17F
-_callocStacks             = D1B1D8
-_callocCards              = D1B207
-_freeStacks               = D1B239
-_drawStack                = D1B28D
+.webaddress               = D1B48D
+__start                   = D1A966
+___exithl                 = D1A990
+skip._exit                = D1A990
+skip.__Exit               = D1A990
+skip._abort               = D1A990
+_exit.sp                  = D1A991
+_exit.flash_wait_states   = D1A99B
+_initCardSprites          = D1ACE7
+_drawCard                 = D1AD48
+_calculation_setup        = D1AE9C
+_freecell_setup           = D1B0BD
+_PATCEGFX_init            = D1B0C8
+_drawBackground           = D1B141
+_drawGame                 = D1B16C
+_main                     = D1B1A0
+_callocStacks             = D1B1F9
+_callocCards              = D1B228
+_freeStacks               = D1B25A
+_drawStack                = D1B2AE
 _face_sprites             = D052CC
-_.str                     = D1B481
-_.str.1                   = D1B48A
-_PATCEGFX_appvar          = D1B40B
-_setup                    = D1B459
+_.str                     = D1B4A2
+_.str.1                   = D1B4AB
+_PATCEGFX_appvar          = D1B42C
+_setup                    = D1B47A
 _numStacks                = D052F0
 _stacks                   = D052F1
 lib.LibLoad               = D1A8FF
@@ -96,7 +96,8 @@ _#gfx_FillScreen          = D1A938
 _#gfx_SetDraw             = D1A93C
 _#gfx_Blit                = D1A940
 _#gfx_HorizLine           = D1A944
-_#gfx_FillRectangle       = D1A948
-_#gfx_Sprite              = D1A94C
-_#gfx_RLETSprite          = D1A950
-_#kb_AnyKey               = D1A95E
+_#gfx_Rectangle           = D1A948
+_#gfx_FillRectangle       = D1A94C
+_#gfx_Sprite              = D1A950
+_#gfx_RLETSprite          = D1A954
+_#kb_AnyKey               = D1A962
